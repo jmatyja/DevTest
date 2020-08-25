@@ -27,12 +27,10 @@ namespace DeveloperTest.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var customer = await customerService.GetCustomerAsync(id);
-
             if (customer == null)
             {
                 return NotFound();
             }
-
             return Ok(customer);
         }
 
@@ -44,9 +42,7 @@ namespace DeveloperTest.Controllers
             {
                 return BadRequest(string.Join(", ", validationMessages));
             }
-            
             var createdCustomer = await customerService.CreateCustomerAsync(createCustomer);
-
             return Created($"customer/{createdCustomer.Id}", createdCustomer);
         }
     }

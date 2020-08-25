@@ -21,7 +21,7 @@ namespace DeveloperTest.Models
             }
             if (!Enum.IsDefined(typeof(CustomerType), Type))
             {
-                validationMessages.Add($"Invalid \"Type\" value. Valid values are: {string.Join(", ", Enum.GetNames(typeof(CustomerType)))}");
+                validationMessages.Add($"Invalid \"Type\" value. Valid values are: \"{string.Join(", ", Enum.GetNames(typeof(CustomerType)))}\"");
             }
             return (!validationMessages.Any(), validationMessages);
         }
