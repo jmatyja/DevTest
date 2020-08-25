@@ -7,5 +7,19 @@ namespace DeveloperTest.Models
 {
     public class CustomerCreate: CustomerBase
     {
+        private const int NAME_MIN_LENGTH = 5;
+        public (bool isValid, IEnumerable<string> validationMessages) Validate()
+        {
+            var validationMessages = new List<string>();
+            if (string.IsNullOrEmpty(Name))
+            {
+                validationMessages.Add("Name cannot be empty");
+            }
+            if(!string.IsNullOrEmpty(Name) && Name.Length < NAME_MIN_LENGTH)
+            {
+                validationMessages.Add($"Name minium characters length is {NAME_MIN_LENGTH}");
+            }
+            return (!validationMessages.Any(), validationMessages);
+        }
     }
 }

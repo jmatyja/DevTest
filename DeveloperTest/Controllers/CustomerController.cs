@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using DeveloperTest.Business.Interfaces;
 using DeveloperTest.Models;
+using System.Threading.Tasks;
 
 namespace DeveloperTest.Controllers
 {
@@ -18,13 +19,14 @@ namespace DeveloperTest.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(customerService.GetCustomers());
+            var customers = await customerService.GetCustomerAsync();
+            return Ok(customers);
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var customer = customerService.GetCustomer(id);
+            var customer = await customerService.GetCustomerAsync(id);
 
             if (customer == null)
             {
@@ -35,14 +37,15 @@ namespace DeveloperTest.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(BaseCustomerModel createCustomer)
+        public async Task<IActionResult> Create(CustomerCreate createCustomer)
         {
-            if (createCustomer.When.Date < DateTime.Now.Date)
+            (var isValid, var validationMessages) = createCustomer.Validate();
+            if (!isValid)
             {
-                return BadRequest("Date cannot be in the past");
+                return BadRequest(string.Join(",", validationMessages));
             }
 
-            var createdCustomer = customerService.CreateCustomer(createCustomer);
+            var createdCustomer = await customerService.CreateCustomerAsync(createCustomer);
 
             return Created($"customer/{createdCustomer.CustomerId}", createdCustomer);
         }
