@@ -22,12 +22,12 @@ namespace DeveloperTest.Business
                 JobId = x.JobId,
                 Engineer = x.Engineer,
                 When = x.When,
-                Customer = new Models.Customer
+                Customer = x.Customer != null ? new Models.Customer
                 {
                     Id = x.Customer.Id,
                     Name = x.Customer.Name,
                     Type = x.Customer.Type
-                }
+                }: null
             }).ToArray();
         }
 
@@ -38,12 +38,12 @@ namespace DeveloperTest.Business
                 JobId = x.JobId,
                 Engineer = x.Engineer,
                 When = x.When,
-                Customer = new Models.Customer
+                Customer = x.Customer != null ? new Models.Customer
                 {
                     Id = x.Customer.Id,
                     Name = x.Customer.Name,
                     Type = x.Customer.Type
-                }
+                }: null
             }).SingleOrDefault();
         }
 
