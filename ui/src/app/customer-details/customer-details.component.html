@@ -1,1 +1,5 @@
-<p>customer-detail works!</p>
+<p>Customer Id: {{customer.id}}</p>
+<p>Name: {{customer.name}}</p>
+<p>Type: {{CustomerType[customer.type]}}</p>
+
+<a [routerLink]="['/customers']">Back</a>
