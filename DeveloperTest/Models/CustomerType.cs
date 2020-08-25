@@ -7,7 +7,7 @@ namespace DeveloperTest.Models
 {
     public enum CustomerType
     {
-        Large,
-        Small
+        Large = 0,
+        Small = 1
     }
 }

@@ -42,9 +42,9 @@ namespace DeveloperTest.Controllers
             (var isValid, var validationMessages) = createCustomer.Validate();
             if (!isValid)
             {
-                return BadRequest(string.Join(",", validationMessages));
+                return BadRequest(string.Join(", ", validationMessages));
             }
-
+            
             var createdCustomer = await customerService.CreateCustomerAsync(createCustomer);
 
             return Created($"customer/{createdCustomer.Id}", createdCustomer);
