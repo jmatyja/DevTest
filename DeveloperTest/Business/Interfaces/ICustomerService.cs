@@ -1,13 +1,15 @@
 ﻿using DeveloperTest.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace DeveloperTest.Business.Interfaces
 {
     public interface ICustomerService
     {
-        CustomerModel[] Getcustomers();
+        Task<IEnumerable<Customer>> GetcustomersAsync();
 
-        CustomerModel GetCustomer(int customerId);
+        Task<Customer> GetCustomerAsync(int customerId);
 
-        CustomerModel CreateCustomer(BaseCustomerModel model);
+        Task<Customer> CreateCustomer(CustomerCreate model);
     }
 }
