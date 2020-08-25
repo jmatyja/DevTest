@@ -21,7 +21,13 @@ namespace DeveloperTest.Business
             {
                 JobId = x.JobId,
                 Engineer = x.Engineer,
-                When = x.When
+                When = x.When,
+                Customer = new Models.Customer
+                {
+                    Id = x.Customer.Id,
+                    Name = x.Customer.Name,
+                    Type = x.Customer.Type
+                }
             }).ToArray();
         }
 
@@ -31,16 +37,24 @@ namespace DeveloperTest.Business
             {
                 JobId = x.JobId,
                 Engineer = x.Engineer,
-                When = x.When
+                When = x.When,
+                Customer = new Models.Customer
+                {
+                    Id = x.Customer.Id,
+                    Name = x.Customer.Name,
+                    Type = x.Customer.Type
+                }
             }).SingleOrDefault();
         }
 
         public JobModel CreateJob(BaseJobModel model)
         {
+            var customer = context.Customers.Find(model.Customer.Id);
             var addedJob = context.Jobs.Add(new Job
             {
                 Engineer = model.Engineer,
-                When = model.When
+                When = model.When,
+                Customer = customer
             });
 
             context.SaveChanges();
@@ -49,7 +63,13 @@ namespace DeveloperTest.Business
             {
                 JobId = addedJob.Entity.JobId,
                 Engineer = addedJob.Entity.Engineer,
-                When = addedJob.Entity.When
+                When = addedJob.Entity.When,
+                Customer = new Models.Customer
+                {
+                    Id = customer.Id,
+                    Name = customer.Name,
+                    Type = customer.Type
+                }
             };
         }
     }
