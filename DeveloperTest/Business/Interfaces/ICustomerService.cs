@@ -6,10 +6,10 @@ namespace DeveloperTest.Business.Interfaces
 {
     public interface ICustomerService
     {
-        Task<IEnumerable<Customer>> GetcustomersAsync();
+        Task<IEnumerable<Customer>> GetCustomersAsync();
 
         Task<Customer> GetCustomerAsync(int customerId);
 
-        Task<Customer> CreateCustomer(CustomerCreate model);
+        Task<Customer> CreateCustomerAsync(CustomerCreate model);
     }
 }

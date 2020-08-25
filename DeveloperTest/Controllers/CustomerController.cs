@@ -17,9 +17,9 @@ namespace DeveloperTest.Controllers
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var customers = await customerService.GetCustomerAsync();
+            var customers = await customerService.GetCustomersAsync();
             return Ok(customers);
         }
 
@@ -47,7 +47,7 @@ namespace DeveloperTest.Controllers
 
             var createdCustomer = await customerService.CreateCustomerAsync(createCustomer);
 
-            return Created($"customer/{createdCustomer.CustomerId}", createdCustomer);
+            return Created($"customer/{createdCustomer.Id}", createdCustomer);
         }
     }
 }
